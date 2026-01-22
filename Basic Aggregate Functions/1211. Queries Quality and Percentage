@@ -1,0 +1,9 @@
+SELECT query_name , 
+ROUND(
+  SUM(RATING/POSITION)/COUNT(*)
+,2) quality,
+ROUND(
+    (SUM(CASE WHEN RATING<3 THEN 1 ELSE 0 END)/COUNT(*))*100
+    ,2) poor_query_percentage 
+FROM Queries
+GROUP BY query_name;
