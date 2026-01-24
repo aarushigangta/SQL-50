@@ -4,3 +4,12 @@ FROM(
     GROUP BY NUM
     HAVING COUNT(*)=1
 )T1;
+
+OR 
+WITH T1 AS (
+    SELECT num FROM MyNumbers 
+    GROUP BY num
+    HAVING COUNT(*)=1
+)
+
+SELECT MAX(num) AS num FROM T1;
