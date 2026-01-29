@@ -1,0 +1,28 @@
+# Write your MySQL query statement below
+(
+    SELECT NAME AS results
+    FROM (
+        SELECT NAME, COUNT(MR.USER_ID) NUM 
+        FROM Users U
+        LEFT JOIN MovieRating MR
+        ON U.user_id=MR.user_id 
+        GROUP BY NAME
+        ORDER BY NUM DESC,NAME
+        LIMIT 1
+    )
+    TB
+)
+UNION ALL
+(
+SELECT title AS result
+FROM(
+    SELECT title , AVG(rating) AS AVGR
+    FROM Movies M
+    LEFT JOIN MovieRating MR
+    ON M.movie_id =MR.movie_id 
+    WHERE LEFT(created_at,7)='2020-02'
+    GROUP BY title
+    ORDER BY AVGR DESC,TITLE
+    LIMIT 1
+) AS TB2
+);
